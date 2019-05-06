@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration>
+
+    <appender name="jdbcAppender" class="org.apache.log4j.jdbc.JDBCAppender">
+        <param name="URL" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+        <param name="Driver" value="oracle.jdbc.driver.OracleDriver"/>
+        <param name="User" value="amir"/>
+        <param name="Password" value="112358"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="INSERT INTO LOGGING (log_date, log_level, location, message) VALUES (SYSDATE, '%p', '%C:%L', '%m')"
+            />
+        </layout>
+    </appender>
+
+    <appender name="file" class="org.apache.log4j.DailyRollingFileAppender">
+        <param name="append" value="true" />
+        <!-- For Tomcat -->
+        <param name="File" value="/home/amir/Log/project.log" />
+        <param name="DatePattern" value=".yyyy-MM-dd" />
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="%d{yyyy-MM-dd  HH:mm:ss} -%t -%x %-5p %c{1}:%L  - %m%n" />
+        </layout>
+    </appender>
+
+    <appender name="STDOUT" class="org.apache.log4j.ConsoleAppender">
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern"
+                   value="[%d{ISO8601}] %p (%C;%L) %m%n"
+            />
+        </layout>
+    </appender>
+
+    <logger name="controller">
+        <level value="info"/>
+        <appender-ref ref="jdbcAppender"/>
+        <appender-ref ref="file"/>
+    </logger>
+
+    <logger name="model">
+        <level value="info"/>
+        <appender-ref ref="jdbcAppender"/>
+        <appender-ref ref="file"/>
+    </logger>
+
+    <root>
+        <level value="info"/>
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+</log4j:configuration>

@@ -1,0 +1,30 @@
+.alertifyNotify{
+    color:black;
+    background-color: #e6112c;
+    border-color:#9f0c1e;
+}
+
+.progressDiv{
+    background-color: black;
+    opacity: 0.5;
+    width: 100%;
+    height: 100%;
+}
+
+.printDiv{
+    width: 100%;
+    height: 100%;
+    margin: 10px;
+    display: block;
+    direction: rtl;
+    position: relative;
+}
+
+.ltr *{
+    direction: ltr !important;
+}
+
+label{
+    width: auto !important;
+}
+
